@@ -25,6 +25,95 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+        - assets/morado/1.png
+        - assets/morado/2.png
+        - assets/morado/3.png
+        - assets/morado/4.png
+        - assets/morado/5.png
+        - assets/morado/6.png
+        - assets/morado/7.png
+        - assets/morado/8.png
+        - assets/morado/9.png
+        - assets/morado/10.png
+        - assets/morado/11.png
+        - assets/morado/12.png
+        - assets/morado/13.png
+        - assets/morado/14.png
+        - assets/morado/15.png
+        - assets/morado/s1.png
+        - assets/morado/s2.png
+        - assets/morado/s3.png
+        - assets/morado/s4.png
+
+        - assets/rojo/1.png
+        - assets/rojo/2.png
+        - assets/rojo/3.png
+        - assets/rojo/4.png
+        - assets/rojo/5.png
+        - assets/rojo/6.png
+        - assets/rojo/7.png
+        - assets/rojo/8.png
+        - assets/rojo/9.png
+        - assets/rojo/10.png
+        - assets/rojo/11.png
+        - assets/rojo/12.png
+        - assets/rojo/13.png
+        - assets/rojo/14.png
+        - assets/rojo/s1.png
+        - assets/rojo/s2.png
+        - assets/rojo/s3.png
+        - assets/rojo/s4.png
+
+        - assets/azul/1.png
+        - assets/azul/2.png
+        - assets/azul/3.png
+        - assets/azul/4.png
+        - assets/azul/5.png
+        - assets/azul/6.png
+        - assets/azul/7.png
+        - assets/azul/8.png
+        - assets/azul/9.png
+        - assets/azul/10.png
+        - assets/azul/11.png
+        - assets/azul/12.png
+        - assets/azul/13.png
+        - assets/azul/14.png
+        - assets/azul/s1.png
+        - assets/azul/s2.png
+        - assets/azul/s3.png
+        - assets/azul/s4.png
+
+        - assets/naranja/1.png
+        - assets/naranja/2.png
+        - assets/naranja/3.png
+        - assets/naranja/4.png
+        - assets/naranja/5.png
+        - assets/naranja/6.png
+        - assets/naranja/7.png
+        - assets/naranja/8.png
+        - assets/naranja/9.png
+        - assets/naranja/10.png
+        - assets/naranja/11.png
+        - assets/naranja/12.png
+        - assets/naranja/13.png
+        - assets/naranja/14.png
+        - assets/naranja/15.png
+        - assets/naranja/s1.png
+        - assets/naranja/s2.png
+        - assets/naranja/s3.png
+        - assets/naranja/s4.png
+
+        - assets/amarillo/s1.png
+        - assets/amarillo/s2.png
+        - assets/amarillo/s3.png
+        - assets/amarillo/s4.png
+
+        - assets/verde/s1.png
+        - assets/verde/s2.png
+        - assets/verde/s3.png
+        - assets/verde/s4.png
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
