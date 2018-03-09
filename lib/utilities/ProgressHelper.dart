@@ -10,6 +10,7 @@ class ProgressHelper {
   int cluesCount = 0;
   List cluesIDs = [];
   List cluesAnswered = [];
+  int selectedSuspicious = 0;
 
   setCluesCount(int value) {
     cluesCount = value;
@@ -33,5 +34,13 @@ class ProgressHelper {
 
   getCluesAnswered() {
     return cluesAnswered;
+  }
+
+  setSelectedSuspicious(int newSelectedSuspicious) {
+    selectedSuspicious = newSelectedSuspicious;
+  }
+
+  getSelectedSuspicious() {
+    return selectedSuspicious;
   }
 }

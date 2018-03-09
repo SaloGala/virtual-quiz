@@ -184,7 +184,8 @@ class CluesTabPageState extends State<CluesTabPage> {
   }
 
   _addClue(String text) {
-    if (Clues.allClues[text] != null) {
+    if (Clues.allClues[text] != null &&
+        Clues.allClues[text]['type'] != 'info') {
       if (Clues.allClues[text]['type'] == widget.colorCase) {
         if (!cluesIDs.contains(Clues.allClues[text]['value'])) {
           int newCount = new ProgressHelper().getCluesCount() + 1;
@@ -229,15 +230,15 @@ class CluesTabPageState extends State<CluesTabPage> {
     if (widget.colorCase == 'morado') {
       return Clues.allClues['moradoTotal']['value'];
     } else if (widget.colorCase == 'rojo') {
-      return 7;
+      return Clues.allClues['rojoTotal']['value'];
     } else if (widget.colorCase == 'azul') {
-      return 3;
+      return Clues.allClues['azulTotal']['value'];
     } else if (widget.colorCase == 'naranja') {
-      return 4;
+      return Clues.allClues['naranjaTotal']['value'];
     } else if (widget.colorCase == 'amarillo') {
-      return 5;
+      return Clues.allClues['amarilloTotal']['value'];
     } else {
-      return 6;
+      return Clues.allClues['verdeTotal']['value'];
     }
   }
 
