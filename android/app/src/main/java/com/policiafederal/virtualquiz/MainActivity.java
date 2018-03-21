@@ -14,8 +14,10 @@ import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
+import io.flutter.view.FlutterView;
 
 import android.provider.Settings;
+import android.view.View;
 
 public class MainActivity extends FlutterActivity {
 
@@ -50,6 +52,8 @@ public class MainActivity extends FlutterActivity {
                             if (isCheckCameraPermission()) {
                                 startActivity(new Intent(MainActivity.this, SimpleScannerActivity.class));
                             }
+                        } else if (call.method.equals("exitApp")) {
+                            finish();
                         }
 
                         result.success(1);
@@ -58,10 +62,12 @@ public class MainActivity extends FlutterActivity {
     }
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.permissionsDialog));
+
+
+        *//*AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.permissionsDialog));
 
 
         builder.setMessage("¿Seguro que desea salir de la aplicación?")
@@ -80,9 +86,9 @@ public class MainActivity extends FlutterActivity {
 
         AlertDialog dialog = builder.create();
 
-        dialog.show();
+        dialog.show();*//*
 
-    }
+    }*/
 
     public static void searchClue(String text) {
         channelObject.invokeMethod("handleText", text);

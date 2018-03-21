@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:virtual_quiz/pages/CasePage.dart';
 
 void main() => runApp(new Levels());
@@ -15,7 +16,6 @@ class Levels extends StatelessWidget {
 
 class LevelsPage extends StatefulWidget {
   LevelsPage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -23,9 +23,14 @@ class LevelsPage extends StatefulWidget {
 }
 
 class LevelsPageState extends State<LevelsPage> {
+  Scaffold levelsScaffold;
+
+  static const channel =
+      const MethodChannel('com.policiafederal.virtualquiz/general');
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    levelsScaffold = new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
         backgroundColor: Colors.indigo[900],
@@ -275,6 +280,35 @@ class LevelsPageState extends State<LevelsPage> {
         ),
         padding: new EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
       ),
+    );
+
+    return new WillPopScope(
+      child: levelsScaffold,
+      onWillPop: () {
+        showDialog<Null>(
+          context: context,
+          child: new AlertDialog(
+            title: new Text('Salir'),
+            content: new Text('¿Quieres salir de la aplicación?'),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('NO'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('SALIR'),
+                onPressed: () async {
+                  try {
+                    int qrCode = await channel.invokeMethod('exitApp');
+                  } on PlatformException catch (e, s) {}
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

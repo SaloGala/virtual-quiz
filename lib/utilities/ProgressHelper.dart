@@ -11,6 +11,7 @@ class ProgressHelper {
   List cluesIDs = [];
   List cluesAnswered = [];
   int selectedSuspicious = 0;
+  bool isCompleted = false;
 
   setCluesCount(int value) {
     cluesCount = value;
@@ -42,5 +43,13 @@ class ProgressHelper {
 
   getSelectedSuspicious() {
     return selectedSuspicious;
+  }
+
+  setIsCompleted(bool newIsCompleted){
+    isCompleted = newIsCompleted;
+  }
+
+  getIsCompleted(){
+    return isCompleted;
   }
 }

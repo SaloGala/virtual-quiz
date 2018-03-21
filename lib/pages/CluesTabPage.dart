@@ -52,13 +52,15 @@ class CluesTabPageState extends State<CluesTabPage> {
     } else {
       int totalClues = _getTotalClues();
       mainText = 'Has encontrado $cluesCount de $totalClues pistas';
+
+      if (widget.colorCase == 'amarillo' || widget.colorCase == 'verde') {
+        secondaryText = 'Has respondido correctamente ${cluesAnswered
+            .length} de $totalClues preguntas';
+      }
       mainSpace = new ListView.builder(
         itemCount: cluesIDs.length,
         itemBuilder: (BuildContext context, int index) {
           if (widget.colorCase == 'amarillo' || widget.colorCase == 'verde') {
-            secondaryText = 'Has respondido correctamente ${cluesAnswered
-                .length} de $totalClues preguntas';
-
             Widget actionWidget;
             if (cluesAnswered.contains(cluesIDs[index])) {
               actionWidget = new Text('Respuesta correcta: ' +
@@ -198,15 +200,119 @@ class CluesTabPageState extends State<CluesTabPage> {
           });
         } else {
           print('¡Ya tienes esta pista!');
+
+          new Timer(
+            new Duration(milliseconds: 500),
+            () {
+              showDialog<Null>(
+                context: context,
+                child: new AlertDialog(
+                  title: new Text('Duplicada'),
+                  content: new Text('¡Ya tienes esta pista!'),
+                  actions: <Widget>[
+                    new FlatButton(
+                      child: new Text('ESCANEAR OTRO CÓDIGO'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        _scanQRCode();
+                      },
+                    ),
+                    new FlatButton(
+                      child: new Text('ACEPTAR'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
         }
       } else {
         print(
           'Esta pista no corresponde a tu caso, recuerda escanear códigos QR para el caso ${widget
               .colorCase}',
         );
+
+        new Timer(
+          new Duration(milliseconds: 500),
+          () {
+            showDialog<Null>(
+              context: context,
+              child: new AlertDialog(
+                title: new Text('Desconocida'),
+                content: new RichText(
+                  text: new TextSpan(
+                    text:
+                        'Esta pista no corresponde a tu caso, recuerda escanear códigos QR para el caso ',
+                    style: new TextStyle(
+                      //fontSize: 25.0,
+                      color: Colors.grey[900],
+                    ),
+                    children: <TextSpan>[
+                      new TextSpan(
+                        text: widget.colorCase,
+                        style: new TextStyle(
+                          //fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          color: _getColor(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text('ESCANEAR OTRO CÓDIGO'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _scanQRCode();
+                    },
+                  ),
+                  new FlatButton(
+                    child: new Text('ACEPTAR'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        );
       }
     } else {
-      print('No se encontró ninguna pista');
+      //print('No se encontró ninguna pista');
+
+      new Timer(
+        new Duration(milliseconds: 500),
+        () {
+          showDialog<Null>(
+            context: context,
+            child: new AlertDialog(
+              title: new Text('Ninguna pista'),
+              content: new Text(
+                  'No se encontró ninguna pista para el código escaneado'),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('ESCANEAR OTRO CÓDIGO'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    _scanQRCode();
+                  },
+                ),
+                new FlatButton(
+                  child: new Text('ACEPTAR'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
     }
   }
 
@@ -284,8 +390,44 @@ class CluesTabPageState extends State<CluesTabPage> {
                     setState(() {
                       cluesAnswered = tempAnsweredClues;
                     });
+
+                    showDialog(
+                      context: context,
+                      child: new AlertDialog(
+                        title: new Text('Correcto'),
+                        content: new Text('Tienes una nueva pista'),
+                        actions: <Widget>[
+                          new FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: new Text(
+                              'ACEPTAR',
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   } else {
                     print('Incorrecto');
+
+                    showDialog(
+                      context: context,
+                      child: new AlertDialog(
+                        title: new Text('Incorrecto'),
+                        content: new Text('Por favor verifica tu respuesta'),
+                        actions: <Widget>[
+                          new FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: new Text(
+                              'ACEPTAR',
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   }
                 }
               },
@@ -293,7 +435,8 @@ class CluesTabPageState extends State<CluesTabPage> {
             )
           ],
           title: new Text(
-              Clues.allClues[widget.colorCase + clueID.toString()]['question']),
+            Clues.allClues[widget.colorCase + clueID.toString()]['question'],
+          ),
           content: new TextField(
             autofocus: true,
             controller: _controller,

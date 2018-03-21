@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:virtual_quiz/pages/AddressTabPage.dart';
 import 'package:virtual_quiz/pages/CluesTabPage.dart';
 import 'package:virtual_quiz/pages/SuspiciousTabPage.dart';
@@ -15,6 +16,9 @@ class CasePage extends StatefulWidget {
 
 class CasePageState extends State<CasePage>
     with SingleTickerProviderStateMixin {
+  static const channel =
+      const MethodChannel('com.policiafederal.virtualquiz/general');
+  Scaffold tabsScaffold;
 
   String step = 'Paso 1: Mira el video';
 
@@ -42,13 +46,43 @@ class CasePageState extends State<CasePage>
     var body = _initBody();
     var bottomNavigationBar = _initBottomNavigationBar();
 
-    return new Scaffold(
+    tabsScaffold = new Scaffold(
       appBar: new AppBar(
         title: new Text(step),
         backgroundColor: color,
       ),
       body: body,
       bottomNavigationBar: bottomNavigationBar,
+    );
+
+    return new WillPopScope(
+      child: tabsScaffold,
+      onWillPop: () {
+        print('Will pop');
+        showDialog<Null>(
+          context: context,
+          child: new AlertDialog(
+            title: new Text('Salir'),
+            content: new Text('¿Quieres salir de la aplicación?'),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('NO'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text('SALIR'),
+                onPressed: () async {
+                  try {
+                    int qrCode = await channel.invokeMethod('exitApp');
+                  } on PlatformException catch (e, s) {}
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

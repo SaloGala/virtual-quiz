@@ -185,7 +185,14 @@ class Clues {
       },
       'numero': 59,
       'ciudad': {
-        'responses': ['juarez', 'juárez', 'cd. juarez', 'cd. juárez'],
+        'responses': [
+          'juarez',
+          'juárez',
+          'cd. juarez',
+          'cd. juárez',
+          'ciudad juarez',
+          'ciudad juárez'
+        ],
         'responseToShow': 'CIUDAD JUÁREZ'
       },
       'estado': {
@@ -256,6 +263,9 @@ class Clues {
           'cdmx',
           'méxico',
           'mexico',
+          'df',
+          'df.',
+          'd.f.',
         ],
         'responseToShow': 'CIUDAD DE MÉXICO'
       },
@@ -263,7 +273,8 @@ class Clues {
         'responses': [
           'df',
           'df.',
-          'distrito federal',
+          'd.f.'
+              'distrito federal',
           'ciudad de mexico',
           'ciudad de méxico',
           'de mexico',
