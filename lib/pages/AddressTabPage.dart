@@ -14,6 +14,10 @@ class AddressTabPage extends StatefulWidget {
 class AddressTabPageState extends State<AddressTabPage> {
   bool isCompleted = false;
 
+  double fontSize1 = 35.0;
+  double fontSizeAlert = 30.0;
+  double fontSizeAlert2 = 20.0;
+
   final TextEditingController _streetController = new TextEditingController();
   final TextEditingController _numberController = new TextEditingController();
   final TextEditingController _cityController = new TextEditingController();
@@ -66,7 +70,10 @@ class AddressTabPageState extends State<AddressTabPage> {
     } else {
       lastView = new Column(
         children: <Widget>[
-          new Text('¿Cuál es la dirección de tu sospechoso?'),
+          new Text(
+            '¿Cuál es la dirección de tu sospechoso?',
+            style: new TextStyle(fontSize: fontSize1),
+          ),
           new Row(
             children: <Widget>[
               new Flexible(
@@ -74,6 +81,10 @@ class AddressTabPageState extends State<AddressTabPage> {
                   child: new TextField(
                     controller: _streetController,
                     decoration: new InputDecoration(labelText: 'Calle'),
+                    style: new TextStyle(
+                      fontSize: fontSize1,
+                      color: Colors.black,
+                    ),
                   ),
                   padding: new EdgeInsets.only(left: 15.0, right: 15.0),
                 ),
@@ -83,6 +94,10 @@ class AddressTabPageState extends State<AddressTabPage> {
                   child: new TextField(
                     controller: _numberController,
                     decoration: new InputDecoration(labelText: 'Número'),
+                    style: new TextStyle(
+                      fontSize: fontSize1,
+                      color: Colors.black,
+                    ),
                   ),
                   padding: new EdgeInsets.only(left: 15.0, right: 15.0),
                 ),
@@ -96,6 +111,10 @@ class AddressTabPageState extends State<AddressTabPage> {
                   child: new TextField(
                     controller: _cityController,
                     decoration: new InputDecoration(labelText: 'Ciudad'),
+                    style: new TextStyle(
+                      fontSize: fontSize1,
+                      color: Colors.black,
+                    ),
                   ),
                   padding: new EdgeInsets.only(left: 15.0, right: 15.0),
                 ),
@@ -105,6 +124,10 @@ class AddressTabPageState extends State<AddressTabPage> {
                   child: new TextField(
                     controller: _stateController,
                     decoration: new InputDecoration(labelText: 'Estado'),
+                    style: new TextStyle(
+                      fontSize: fontSize1,
+                      color: Colors.black,
+                    ),
                   ),
                   padding: new EdgeInsets.only(left: 15.0, right: 15.0),
                 ),
@@ -117,7 +140,7 @@ class AddressTabPageState extends State<AddressTabPage> {
             },
             child: new Text(
               'VER RESULTADO',
-              style: new TextStyle(color: Colors.white),
+              style: new TextStyle(color: Colors.white, fontSize: fontSize1),
             ),
             color: color,
           ),
@@ -195,8 +218,14 @@ class AddressTabPageState extends State<AddressTabPage> {
       showDialog(
         context: context,
         child: new AlertDialog(
-          title: new Text('¡Felicidades!'),
-          content: new Text('Has resuelto el caso exitosamente'),
+          title: new Text(
+            '¡Felicidades!',
+            style: new TextStyle(fontSize: fontSizeAlert),
+          ),
+          content: new Text(
+            'Has resuelto el caso exitosamente',
+            style: new TextStyle(fontSize: fontSizeAlert2),
+          ),
           actions: <Widget>[
             new FlatButton(
               onPressed: () {
@@ -204,6 +233,7 @@ class AddressTabPageState extends State<AddressTabPage> {
               },
               child: new Text(
                 'ACEPTAR',
+                style: new TextStyle(fontSize: fontSizeAlert2),
               ),
             ),
           ],
@@ -220,9 +250,14 @@ class AddressTabPageState extends State<AddressTabPage> {
       showDialog(
         context: context,
         child: new AlertDialog(
-          title: new Text('Incorrecto'),
+          title: new Text(
+            'Incorrecto',
+            style: new TextStyle(fontSize: fontSizeAlert),
+          ),
           content: new Text(
-              'La dirección que has introducido es incorrecta, por favor vuelve a intentarlo'),
+            'La dirección que has introducido es incorrecta, por favor vuelve a intentarlo',
+            style: new TextStyle(fontSize: fontSizeAlert2),
+          ),
           actions: <Widget>[
             new FlatButton(
               onPressed: () {
@@ -230,6 +265,7 @@ class AddressTabPageState extends State<AddressTabPage> {
               },
               child: new Text(
                 'ACEPTAR',
+                style: new TextStyle(fontSize: fontSizeAlert2),
               ),
             ),
           ],

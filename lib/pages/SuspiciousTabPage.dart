@@ -13,6 +13,10 @@ class SuspiciousTabPage extends StatefulWidget {
 class SuspiciousTabPageState extends State<SuspiciousTabPage> {
   int selectedSuspicious;
 
+  double fontSize1 = 35.0;
+  double fontSizeButton = 30.0;
+  double fontSizeToolbar = 40.0;
+
   @override
   void initState() {
     selectedSuspicious = new ProgressHelper().getSelectedSuspicious();
@@ -34,12 +38,14 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
             new Container(
               child: new Text(
                 'Selecciona un sospechoso con base en las pistas que encontraste',
+                style: new TextStyle(fontSize: fontSize1),
               ),
               margin: new EdgeInsets.all(5.0),
             ),
             new Container(
               child: new Text(
                 'Presiona una imagen para hacer zoom en ella',
+                style: new TextStyle(fontSize: fontSize1),
               ),
               margin: new EdgeInsets.all(5.0),
             ),
@@ -73,7 +79,10 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
                             },
                             child: new Text(
                               'Seleccionar',
-                              style: new TextStyle(color: Colors.white),
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSizeButton,
+                              ),
                             ),
                             color: color,
                           ),
@@ -109,7 +118,10 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
                             },
                             child: new Text(
                               'Seleccionar',
-                              style: new TextStyle(color: Colors.white),
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSizeButton,
+                              ),
                             ),
                             color: color,
                           ),
@@ -151,7 +163,10 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
                             },
                             child: new Text(
                               'Seleccionar',
-                              style: new TextStyle(color: Colors.white),
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSizeButton,
+                              ),
                             ),
                             color: color,
                           ),
@@ -187,7 +202,10 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
                             },
                             child: new Text(
                               'Seleccionar',
-                              style: new TextStyle(color: Colors.white),
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSizeButton,
+                              ),
                             ),
                             color: color,
                           ),
@@ -207,7 +225,10 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
         child: new Column(
           children: <Widget>[
             new Container(
-              child: new Text('Has seleccionado a un sospechoso:'),
+              child: new Text(
+                'Has seleccionado a un sospechoso:',
+                style: new TextStyle(fontSize: fontSize1),
+              ),
               padding: new EdgeInsets.only(
                 top: 20.0,
               ),
@@ -249,7 +270,8 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
                 },
                 child: new Text(
                   'Cambiar',
-                  style: new TextStyle(color: Colors.white),
+                  style: new TextStyle(
+                      color: Colors.white, fontSize: fontSizeButton),
                 ),
                 color: color,
               ),
@@ -285,7 +307,12 @@ class SuspiciousTabPageState extends State<SuspiciousTabPage> {
         new MaterialPageRoute<Null>(builder: (BuildContext context) {
       return new Scaffold(
         appBar: new AppBar(
-          title: new Text(title),
+          title: new Text(
+            title,
+            style: new TextStyle(
+              fontSize: fontSizeToolbar,
+            ),
+          ),
           backgroundColor: _getColor(),
         ),
         body: new SizedBox.expand(

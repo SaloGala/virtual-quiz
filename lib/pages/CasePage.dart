@@ -21,6 +21,9 @@ class CasePageState extends State<CasePage>
   Scaffold tabsScaffold;
 
   String step = 'Paso 1: Mira el video';
+  double fontSizeToolbar = 40.0;
+  double fontSizeAlert = 30.0;
+  double fontSizeAlert2 = 20.0;
 
   TabController controller;
 
@@ -48,7 +51,10 @@ class CasePageState extends State<CasePage>
 
     tabsScaffold = new Scaffold(
       appBar: new AppBar(
-        title: new Text(step),
+        title: new Text(
+          step,
+          style: new TextStyle(fontSize: fontSizeToolbar),
+        ),
         backgroundColor: color,
       ),
       body: body,
@@ -62,17 +68,31 @@ class CasePageState extends State<CasePage>
         showDialog<Null>(
           context: context,
           child: new AlertDialog(
-            title: new Text('Salir'),
-            content: new Text('¿Quieres salir de la aplicación?'),
+            title: new Text(
+              'Salir',
+              style: new TextStyle(
+                fontSize: fontSizeAlert,
+              ),
+            ),
+            content: new Text(
+              '¿Quieres salir de la aplicación?',
+              style: new TextStyle(fontSize: fontSizeAlert2),
+            ),
             actions: <Widget>[
               new FlatButton(
-                child: new Text('NO'),
+                child: new Text(
+                  'NO',
+                  style: new TextStyle(fontSize: fontSizeAlert2),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               new FlatButton(
-                child: new Text('SALIR'),
+                child: new Text(
+                  'SALIR',
+                  style: new TextStyle(fontSize: fontSizeAlert2),
+                ),
                 onPressed: () async {
                   try {
                     int qrCode = await channel.invokeMethod('exitApp');
@@ -126,7 +146,11 @@ class CasePageState extends State<CasePage>
 
     return new Material(
       color: color,
-      child: new TabBar(controller: controller, tabs: tabs),
+      child: new TabBar(
+        controller: controller,
+        tabs: tabs,
+        labelStyle: new TextStyle(fontSize: 25.0),
+      ),
     );
   }
 

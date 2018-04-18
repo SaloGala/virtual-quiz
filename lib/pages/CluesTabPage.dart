@@ -15,6 +15,14 @@ class CluesTabPage extends StatefulWidget {
 }
 
 class CluesTabPageState extends State<CluesTabPage> {
+  double fontSize1 = 35.0;
+  double fontSize2 = 40.0;
+  double fontSizeAlert = 30.0;
+  double fontSizeTitle = 40.0;
+  double fontSizeAlert2 = 20.0;
+  double fontSizeSubtitle = 20.0;
+  double fontSizeQuestion = 30.0;
+
   static const channel =
       const MethodChannel('com.policiafederal.virtualquiz/general');
 
@@ -47,7 +55,10 @@ class CluesTabPageState extends State<CluesTabPage> {
     if (cluesCount == 0) {
       mainText = '';
       mainSpace = new Center(
-        child: new Text('Todavía no has encontrado ninguna pista'),
+        child: new Text(
+          'Todavía no has encontrado ninguna pista',
+          style: new TextStyle(fontSize: fontSize2),
+        ),
       );
     } else {
       int totalClues = _getTotalClues();
@@ -63,9 +74,12 @@ class CluesTabPageState extends State<CluesTabPage> {
           if (widget.colorCase == 'amarillo' || widget.colorCase == 'verde') {
             Widget actionWidget;
             if (cluesAnswered.contains(cluesIDs[index])) {
-              actionWidget = new Text('Respuesta correcta: ' +
-                  Clues.allClues[widget.colorCase + cluesIDs[index].toString()]
-                      ['responseToShow']);
+              actionWidget = new Text(
+                'Respuesta correcta: ' +
+                    Clues.allClues[widget.colorCase +
+                        cluesIDs[index].toString()]['responseToShow'],
+                style: new TextStyle(fontSize: fontSizeQuestion, color: Colors.green[400]),
+              );
             } else {
               actionWidget = new RaisedButton(
                 onPressed: () {
@@ -73,7 +87,8 @@ class CluesTabPageState extends State<CluesTabPage> {
                 },
                 child: new Text(
                   'Responder',
-                  style: new TextStyle(color: Colors.white),
+                  style: new TextStyle(
+                      color: Colors.white, fontSize: fontSizeQuestion),
                 ),
                 color: color,
               );
@@ -92,6 +107,7 @@ class CluesTabPageState extends State<CluesTabPage> {
                   new Text(
                     Clues.allClues[widget.colorCase +
                         cluesIDs[index].toString()]['question'],
+                    style: new TextStyle(fontSize: fontSizeQuestion),
                   ),
                   new Container(
                     height: 20.0,
@@ -129,6 +145,7 @@ class CluesTabPageState extends State<CluesTabPage> {
             child: new Text(
               'Escanea los códigos QR a lo largo del museo para encontrar pistas sobre tu caso',
               textAlign: TextAlign.center,
+              style: new TextStyle(fontSize: fontSize1),
             ),
             padding: new EdgeInsets.only(left: 10.0, right: 10.0),
           ),
@@ -141,23 +158,31 @@ class CluesTabPageState extends State<CluesTabPage> {
             },
             child: new Text(
               'ESCANEAR CÓDIGO QR',
-              style: new TextStyle(color: Colors.white),
+              style: new TextStyle(color: Colors.white, fontSize: fontSize1),
             ),
             color: color,
           ),
           new Container(
             height: 25.0,
           ),
-          new Text(mainText),
+          new Text(
+            mainText,
+            style: new TextStyle(fontSize: fontSize1),
+          ),
           new Container(
             height: 25.0,
           ),
-          new Text(secondaryText),
+          new Text(
+            secondaryText,
+            style: new TextStyle(fontSize: fontSizeSubtitle),
+          ),
           new Container(
             height: 25.0,
           ),
           new Flexible(
-            child: mainSpace,
+            child: new Center(
+              child: mainSpace,
+            ),
           )
         ],
       ),
@@ -207,18 +232,30 @@ class CluesTabPageState extends State<CluesTabPage> {
               showDialog<Null>(
                 context: context,
                 child: new AlertDialog(
-                  title: new Text('Duplicada'),
-                  content: new Text('¡Ya tienes esta pista!'),
+                  title: new Text(
+                    'Duplicada',
+                    style: new TextStyle(fontSize: fontSizeTitle),
+                  ),
+                  content: new Text(
+                    '¡Ya tienes esta pista!',
+                    style: new TextStyle(fontSize: fontSizeAlert),
+                  ),
                   actions: <Widget>[
                     new FlatButton(
-                      child: new Text('ESCANEAR OTRO CÓDIGO'),
+                      child: new Text(
+                        'ESCANEAR OTRO CÓDIGO',
+                        style: new TextStyle(fontSize: fontSizeAlert2),
+                      ),
                       onPressed: () {
                         Navigator.of(context).pop();
                         _scanQRCode();
                       },
                     ),
                     new FlatButton(
-                      child: new Text('ACEPTAR'),
+                      child: new Text(
+                        'ACEPTAR',
+                        style: new TextStyle(fontSize: fontSizeAlert2),
+                      ),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -241,19 +278,23 @@ class CluesTabPageState extends State<CluesTabPage> {
             showDialog<Null>(
               context: context,
               child: new AlertDialog(
-                title: new Text('Desconocida'),
+                title: new Text(
+                  'Desconocida',
+                  style: new TextStyle(fontSize: fontSizeTitle),
+                ),
                 content: new RichText(
                   text: new TextSpan(
                     text:
                         'Esta pista no corresponde a tu caso, recuerda escanear códigos QR para el caso ',
                     style: new TextStyle(
-                      //fontSize: 25.0,
-                      color: Colors.grey[900],
-                    ),
+                        //fontSize: 25.0,
+                        color: Colors.grey[900],
+                        fontSize: fontSizeAlert),
                     children: <TextSpan>[
                       new TextSpan(
                         text: widget.colorCase,
                         style: new TextStyle(
+                          fontSize: fontSizeAlert,
                           //fontSize: 25.0,
                           fontWeight: FontWeight.bold,
                           color: _getColor(),
@@ -264,14 +305,20 @@ class CluesTabPageState extends State<CluesTabPage> {
                 ),
                 actions: <Widget>[
                   new FlatButton(
-                    child: new Text('ESCANEAR OTRO CÓDIGO'),
+                    child: new Text(
+                      'ESCANEAR OTRO CÓDIGO',
+                      style: new TextStyle(fontSize: fontSizeAlert2),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                       _scanQRCode();
                     },
                   ),
                   new FlatButton(
-                    child: new Text('ACEPTAR'),
+                    child: new Text(
+                      'ACEPTAR',
+                      style: new TextStyle(fontSize: fontSizeAlert2),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -291,19 +338,30 @@ class CluesTabPageState extends State<CluesTabPage> {
           showDialog<Null>(
             context: context,
             child: new AlertDialog(
-              title: new Text('Ninguna pista'),
+              title: new Text(
+                'Ninguna pista',
+                style: new TextStyle(fontSize: fontSizeTitle),
+              ),
               content: new Text(
-                  'No se encontró ninguna pista para el código escaneado'),
+                'No se encontró ninguna pista para el código escaneado',
+                style: new TextStyle(fontSize: fontSizeAlert),
+              ),
               actions: <Widget>[
                 new FlatButton(
-                  child: new Text('ESCANEAR OTRO CÓDIGO'),
+                  child: new Text(
+                    'ESCANEAR OTRO CÓDIGO',
+                    style: new TextStyle(fontSize: fontSizeAlert2),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                     _scanQRCode();
                   },
                 ),
                 new FlatButton(
-                  child: new Text('ACEPTAR'),
+                  child: new Text(
+                    'ACEPTAR',
+                    style: new TextStyle(fontSize: fontSizeAlert2),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -360,7 +418,10 @@ class CluesTabPageState extends State<CluesTabPage> {
                   Navigator.of(context).pop();
                 }
               },
-              child: new Text('CANCELAR'),
+              child: new Text(
+                'CANCELAR',
+                style: new TextStyle(fontSize: fontSizeAlert2),
+              ),
             ),
             new FlatButton(
               onPressed: () {
@@ -394,8 +455,14 @@ class CluesTabPageState extends State<CluesTabPage> {
                     showDialog(
                       context: context,
                       child: new AlertDialog(
-                        title: new Text('Correcto'),
-                        content: new Text('Tienes una nueva pista'),
+                        title: new Text(
+                          'Correcto',
+                          style: new TextStyle(fontSize: fontSizeTitle),
+                        ),
+                        content: new Text(
+                          'Tienes una nueva pista',
+                          style: new TextStyle(fontSize: fontSizeAlert),
+                        ),
                         actions: <Widget>[
                           new FlatButton(
                             onPressed: () {
@@ -403,6 +470,7 @@ class CluesTabPageState extends State<CluesTabPage> {
                             },
                             child: new Text(
                               'ACEPTAR',
+                              style: new TextStyle(fontSize: fontSizeAlert2),
                             ),
                           ),
                         ],
@@ -414,8 +482,14 @@ class CluesTabPageState extends State<CluesTabPage> {
                     showDialog(
                       context: context,
                       child: new AlertDialog(
-                        title: new Text('Incorrecto'),
-                        content: new Text('Por favor verifica tu respuesta'),
+                        title: new Text(
+                          'Incorrecto',
+                          style: new TextStyle(fontSize: fontSizeTitle),
+                        ),
+                        content: new Text(
+                          'Por favor verifica tu respuesta',
+                          style: new TextStyle(fontSize: fontSizeAlert),
+                        ),
                         actions: <Widget>[
                           new FlatButton(
                             onPressed: () {
@@ -423,6 +497,7 @@ class CluesTabPageState extends State<CluesTabPage> {
                             },
                             child: new Text(
                               'ACEPTAR',
+                              style: new TextStyle(fontSize: fontSizeAlert2),
                             ),
                           ),
                         ],
@@ -431,11 +506,15 @@ class CluesTabPageState extends State<CluesTabPage> {
                   }
                 }
               },
-              child: new Text('CALIFICAR'),
+              child: new Text(
+                'CALIFICAR',
+                style: new TextStyle(fontSize: fontSizeAlert2),
+              ),
             )
           ],
           title: new Text(
             Clues.allClues[widget.colorCase + clueID.toString()]['question'],
+            style: new TextStyle(fontSize: fontSize1),
           ),
           content: new TextField(
             autofocus: true,

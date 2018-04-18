@@ -13,6 +13,9 @@ class VideoTabPage extends StatefulWidget {
 }
 
 class VideoTabPageState extends State<VideoTabPage> {
+
+  double fontSize1 = 45.0;
+
   static const channel =
       const MethodChannel('com.policiafederal.virtualquiz/general');
 
@@ -28,14 +31,14 @@ class VideoTabPageState extends State<VideoTabPage> {
               text: new TextSpan(
                 text: 'Mira el video del caso ',
                 style: new TextStyle(
-                  fontSize: 25.0,
+                  fontSize: fontSize1,
                   color: Colors.grey[900],
                 ),
                 children: <TextSpan>[
                   new TextSpan(
                     text: widget.colorCase,
                     style: new TextStyle(
-                      fontSize: 25.0,
+                      fontSize: fontSize1,
                       fontWeight: FontWeight.bold,
                       color: color,
                     ),
@@ -44,7 +47,7 @@ class VideoTabPageState extends State<VideoTabPage> {
                     text:
                         ' al inicio del recorrido en el museo. \n\nSi necesitas volverlo a ver, puedes hacerlo en cualquier momento a aquí:',
                     style: new TextStyle(
-                      fontSize: 25.0,
+                      fontSize: fontSize1,
                       color: Colors.grey[900],
                     ),
                   ),
@@ -55,7 +58,7 @@ class VideoTabPageState extends State<VideoTabPage> {
               child: new Text(
                 'VER VIDEO',
                 style: new TextStyle(
-                  fontSize: 25.0,
+                  fontSize: fontSize1,
                   color: Colors.white,
                 ),
               ),

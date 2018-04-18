@@ -25,6 +25,11 @@ class LevelsPage extends StatefulWidget {
 class LevelsPageState extends State<LevelsPage> {
   Scaffold levelsScaffold;
 
+  double fontSizeToolbar = 40.0;
+  double fontSize1 = 45.0;
+  double fontSizeAlert = 30.0;
+  double fontSizeAlert2 = 20.0;
+
   static const channel =
       const MethodChannel('com.policiafederal.virtualquiz/general');
 
@@ -32,7 +37,9 @@ class LevelsPageState extends State<LevelsPage> {
   Widget build(BuildContext context) {
     levelsScaffold = new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text(widget.title,
+            style: new TextStyle(
+                fontSize: fontSizeToolbar, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.indigo[900],
       ),
       body: new Container(
@@ -45,7 +52,7 @@ class LevelsPageState extends State<LevelsPage> {
                     'Selecciona un nivel:',
                     style: new TextStyle(
                         color: Colors.indigo[900],
-                        fontSize: 22.0,
+                        fontSize: fontSize1,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -67,7 +74,7 @@ class LevelsPageState extends State<LevelsPage> {
                       'Fácil',
                       style: new TextStyle(
                         color: Colors.indigo[900],
-                        fontSize: 18.0,
+                        fontSize: fontSize1,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -81,7 +88,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'MORADO',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -109,7 +116,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'ROJO',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -137,7 +144,7 @@ class LevelsPageState extends State<LevelsPage> {
                       'Intermedio',
                       style: new TextStyle(
                         color: Colors.indigo[900],
-                        fontSize: 18.0,
+                        fontSize: fontSize1,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -151,7 +158,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'AZUL',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -179,7 +186,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'NARANJA',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -207,7 +214,7 @@ class LevelsPageState extends State<LevelsPage> {
                       'Difícil',
                       style: new TextStyle(
                         color: Colors.indigo[900],
-                        fontSize: 18.0,
+                        fontSize: fontSize1,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -221,7 +228,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'AMARILLO',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -249,7 +256,7 @@ class LevelsPageState extends State<LevelsPage> {
                               'VERDE',
                               style: new TextStyle(
                                 color: Colors.white,
-                                fontSize: 20.0,
+                                fontSize: fontSize1,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -288,17 +295,29 @@ class LevelsPageState extends State<LevelsPage> {
         showDialog<Null>(
           context: context,
           child: new AlertDialog(
-            title: new Text('Salir'),
-            content: new Text('¿Quieres salir de la aplicación?'),
+            title: new Text(
+              'Salir',
+              style: new TextStyle(fontSize: fontSizeAlert),
+            ),
+            content: new Text(
+              '¿Quieres salir de la aplicación?',
+              style: new TextStyle(fontSize: fontSizeAlert2),
+            ),
             actions: <Widget>[
               new FlatButton(
-                child: new Text('NO'),
+                child: new Text(
+                  'NO',
+                  style: new TextStyle(fontSize: fontSizeAlert2),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               new FlatButton(
-                child: new Text('SALIR'),
+                child: new Text(
+                  'SALIR',
+                  style: new TextStyle(fontSize: fontSizeAlert2),
+                ),
                 onPressed: () async {
                   try {
                     int qrCode = await channel.invokeMethod('exitApp');
